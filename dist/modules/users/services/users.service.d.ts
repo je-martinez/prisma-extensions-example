@@ -16,5 +16,5 @@ export declare class UsersService {
         where: Prisma.UserWhereUniqueInput;
         data: Prisma.UserUpdateInput;
     }): Promise<User>;
-    deleteUser(where: Prisma.UserWhereUniqueInput): Promise<User>;
+    deleteUser(id: number): Promise<User>;
 }

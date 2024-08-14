@@ -1,4 +1,31 @@
 import { Prisma } from "@prisma/client";
+export declare const additionalFields: (client: any) => {
+    $extends: {
+        extArgs: import("@prisma/client/runtime/library").InternalArgs<{
+            user: {
+                fullName: {
+                    needs: {
+                        firstName: true;
+                        lastName: true;
+                    };
+                    compute(user: {
+                        firstName: string;
+                        lastName: string;
+                    }): string;
+                };
+            };
+        }, unknown, {}, unknown>;
+    };
+};
+export declare const additionalMethods: (client: any) => {
+    $extends: {
+        extArgs: import("@prisma/client/runtime/library").InternalArgs<unknown, {
+            $allModels: {
+                exists<T>(this: T, where: Prisma.Args<T, "findFirst">["where"]): Promise<boolean>;
+            };
+        }, {}, unknown>;
+    };
+};
 export declare const softDelete: (client: any) => {
     $extends: {
         extArgs: import("@prisma/client/runtime/library").InternalArgs<unknown, {

@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Post" ALTER COLUMN "deletedAt" SET DATA TYPE DATE;
+
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "deletedAt" SET DATA TYPE DATE;

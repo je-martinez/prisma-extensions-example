@@ -6,19 +6,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostsModule = void 0;
+exports.DatabaseModule = exports.PRISMA_INJECTION_TOKEN = void 0;
 const common_1 = require("@nestjs/common");
-const posts_controller_1 = require("./posts.controller");
-const posts_service_1 = require("./services/posts.service");
-const database_module_1 = require("../../database/database.module");
-let PostsModule = class PostsModule {
+const database_service_1 = require("./services/database.service");
+exports.PRISMA_INJECTION_TOKEN = "PRISMA_INJECTION_TOKEN";
+let DatabaseModule = class DatabaseModule {
 };
-exports.PostsModule = PostsModule;
-exports.PostsModule = PostsModule = __decorate([
+exports.DatabaseModule = DatabaseModule;
+exports.DatabaseModule = DatabaseModule = __decorate([
     (0, common_1.Module)({
-        imports: [database_module_1.DatabaseModule],
-        controllers: [posts_controller_1.PostsController],
-        providers: [posts_service_1.PostsService],
+        providers: [
+            {
+                provide: exports.PRISMA_INJECTION_TOKEN,
+                useFactory() {
+                    return new database_service_1.DatabaseService();
+                },
+            },
+        ],
+        exports: [exports.PRISMA_INJECTION_TOKEN],
     })
-], PostsModule);
-//# sourceMappingURL=posts.module.js.map
+], DatabaseModule);
+//# sourceMappingURL=database.module.js.map

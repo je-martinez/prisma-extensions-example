@@ -12,76 +12,76 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostsController = void 0;
+exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
-const posts_service_1 = require("./services/posts.service");
+const users_service_1 = require("./services/users.service");
 const chance_1 = require("chance");
-let PostsController = class PostsController {
-    constructor(postService) {
-        this.postService = postService;
+let UsersController = class UsersController {
+    constructor(usersService) {
+        this.usersService = usersService;
     }
-    async getPosts() {
-        return this.postService.posts({});
+    async getUsers() {
+        return this.usersService.users({});
     }
-    async getPostById(id) {
-        return this.postService.post({ id: parseInt(id) });
+    async getUserById(id) {
+        return this.usersService.user({ id: parseInt(id) });
     }
-    async createPost() {
+    async createUser() {
         const input = {
-            title: (0, chance_1.Chance)().sentence({ words: 5 }),
-            content: (0, chance_1.Chance)().paragraph({ sentences: 15 }),
-            published: (0, chance_1.Chance)().bool(),
+            email: (0, chance_1.Chance)().email(),
+            firstName: (0, chance_1.Chance)().name(),
+            lastName: (0, chance_1.Chance)().last(),
         };
-        return this.postService.createPost(input);
+        return this.usersService.createUser(input);
     }
-    async updatePost(id) {
+    async updateUser(id) {
         const input = {
-            title: (0, chance_1.Chance)().sentence({ words: 5 }),
-            content: (0, chance_1.Chance)().paragraph({ sentences: 15 }),
-            published: (0, chance_1.Chance)().bool(),
+            email: (0, chance_1.Chance)().email(),
+            firstName: (0, chance_1.Chance)().name(),
+            lastName: (0, chance_1.Chance)().last(),
         };
-        return this.postService.updatePost({ where: { id: parseInt(id) }, data: input });
+        return this.usersService.updateUser({ where: { id: parseInt(id) }, data: input });
     }
-    async deletePost(id) {
-        return this.postService.deletePost(parseInt(id));
+    async deleteUser(id) {
+        return this.usersService.deleteUser(parseInt(id));
     }
 };
-exports.PostsController = PostsController;
+exports.UsersController = UsersController;
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], PostsController.prototype, "getPosts", null);
+], UsersController.prototype, "getUsers", null);
 __decorate([
     (0, common_1.Get)("/:id"),
     __param(0, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], PostsController.prototype, "getPostById", null);
+], UsersController.prototype, "getUserById", null);
 __decorate([
     (0, common_1.Post)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], PostsController.prototype, "createPost", null);
+], UsersController.prototype, "createUser", null);
 __decorate([
     (0, common_1.Put)("/:id"),
     __param(0, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], PostsController.prototype, "updatePost", null);
+], UsersController.prototype, "updateUser", null);
 __decorate([
     (0, common_1.Delete)("/:id"),
     __param(0, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], PostsController.prototype, "deletePost", null);
-exports.PostsController = PostsController = __decorate([
-    (0, common_1.Controller)("posts"),
-    __metadata("design:paramtypes", [posts_service_1.PostsService])
-], PostsController);
-//# sourceMappingURL=posts.controller.js.map
+], UsersController.prototype, "deleteUser", null);
+exports.UsersController = UsersController = __decorate([
+    (0, common_1.Controller)("users"),
+    __metadata("design:paramtypes", [users_service_1.UsersService])
+], UsersController);
+//# sourceMappingURL=users.controller.js.map

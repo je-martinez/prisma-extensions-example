@@ -1,10 +1,11 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { User, Prisma } from "@prisma/client";
 import { DatabaseService } from "./../../../database/services/database.service";
+import { PRISMA_INJECTION_TOKEN } from "src/database/database.module";
 
 @Injectable()
 export class UsersService {
-  constructor(private prisma: DatabaseService) {}
+  constructor(@Inject(PRISMA_INJECTION_TOKEN) private prisma: DatabaseService) {}
 
   async user(userWhereUniqueInput: Prisma.UserWhereUniqueInput): Promise<User | null> {
     return this.prisma.user.findUnique({
@@ -35,7 +36,10 @@ export class UsersService {
     });
   }
 
-  async updateUser(params: { where: Prisma.UserWhereUniqueInput; data: Prisma.UserUpdateInput }): Promise<User> {
+  async updateUser(params: {
+    where: Prisma.UserWhereUniqueInput;
+    data: Prisma.UserUpdateInput;
+  }): Promise<User> {
     const { where, data } = params;
     return this.prisma.user.update({
       data,
@@ -43,9 +47,9 @@ export class UsersService {
     });
   }
 
-  async deleteUser(where: Prisma.UserWhereUniqueInput): Promise<User> {
+  async deleteUser(id: number): Promise<User> {
     return this.prisma.user.delete({
-      where,
+      id,
     });
   }
 }

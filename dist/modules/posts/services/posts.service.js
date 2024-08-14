@@ -8,9 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostsService = void 0;
 const common_1 = require("@nestjs/common");
+const database_module_1 = require("../../../database/database.module");
 const database_service_1 = require("../../../database/services/database.service");
 let PostsService = class PostsService {
     constructor(prisma) {
@@ -43,15 +47,16 @@ let PostsService = class PostsService {
             where,
         });
     }
-    async deletePost(where) {
+    async deletePost(id) {
         return this.prisma.post.delete({
-            where,
+            id,
         });
     }
 };
 exports.PostsService = PostsService;
 exports.PostsService = PostsService = __decorate([
     (0, common_1.Injectable)(),
+    __param(0, (0, common_1.Inject)(database_module_1.PRISMA_INJECTION_TOKEN)),
     __metadata("design:paramtypes", [database_service_1.DatabaseService])
 ], PostsService);
 //# sourceMappingURL=posts.service.js.map
